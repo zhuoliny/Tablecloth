@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="app_name">智能桌布</string>
+    <string name="go">运行</string>
+    <string name="setting">设置</string>
+    <string name="start">开始</string>
+    <string name="go_on">继续</string>
+    <string name="stop">停止</string>
+    <string name="out">退出</string>
+    <string name="add">添加</string>
+    <string name="remove">删除</string>
+    <string name="save">保存</string>
+    <string name="preview">预览</string>
+    <string name="record">记录</string>
+    <string name="home">主页</string>
+
+    <string name="device_not_support">不支持USB</string>
+    <string name="device_attached">USB设备连接成功</string>
+    <string name="device_detached">USB设备断开连接</string>
+    <string name="no_device_or_not_match">没有USB设备连接或设备不匹配</string>
+
+    <string name="mode_black_and_red">黑红模式</string>
+    <string name="mode_colorful">彩色模式</string>
+    <string name="mode_rainbow">彩虹模式</string>
+    <string name="mode_preset">预设模式</string>
+    <string name="mode_customized">自定义模式</string>
+    <string name="mode_work">工作模式</string>
+    <string name="mode_group">灯数设置</string>
+    <string name="mode_area">区域设置</string>
+    <string name="mode_hammer">蓝牙设备</string>
+    <string name="mode_read_datas">数据模式</string>
+    <string name="mode_main_UI">全局模式</string>
+
+    <string name="action_read_pressures">读取压力数据</string>
+    <string name="action_read_orders">读取命令数据</string>
+    <string name="action_warning">没有压力数据，请连接硬件</string>
+
+    <string name="lights_control">灯光颜色选择</string>
+    <string name="lights_counts">亮灯的盏数：</string>
+    <string name="lights_sure">确定</string>
+    <string name="lights_on">亮</string>
+    <string name="lights_off">暗</string>
+
+    <string name="show_lights">显示亮灯</string>
+    <string name="set_lights">设置亮灯</string>
+
+    <string name="data_date_new">新的日期</string>
+    <string name="data_add_date">添加新的日期</string>
+    <string name="data_add_attempts">添加一次数据</string>
+    <string name="data_remove_attempts">删除最近的一次数据</string>
+    <string name="data_hello">hello I am the location of Attempts：</string>
+
+    <string name="light_mode_random">随机模式</string>
+    <string name="light_mode_sequential">顺序模式</string>
+    <string name="light_mode_odd_numbers">奇数模式</string>
+    <string name="light_mode_even_numbers">偶数模式</string>
+    <string name="light_mode_discontinuous">间隔模式</string>
+    <string name="light_mode_zigzag">折线模式</string>
+    <string name="light_mode_two_led">双亮模式</string>
+    <string name="light_mode_two_alternating">交替模式</string>
+    <string name="light_mode_trajectory">抛物线模式</string>
+
+    <string name="light_guide_period">请选择显示周期</string>
+    <string name="light_guide_period_preset">请选择预设模式的显示周期</string>
+    <string name="light_guide_direction_sequential">请选择顺序模式的亮灯方向</string>
+    <string name="light_guide_gap_discontinuous">请选择间隔模式的亮灯间隔数</string>
+    <string name="light_guide_area">请选择亮灯的有效范围</string>
+    <string name="light_guide_group">请选择亮一组灯的数量</string>
+    <string name="light_guide_mode">请选择亮灯模式</string>
+
+    <string name="work_mode_triggle">触发模式(熄灭绿灯，错误的动作会点亮红灯)</string>
+    <string name="work_mode_preset">预设模式(请自定义亮灯的周期)</string>
+    <string name="work_mode_randomized">随机模式(亮灯周期随机)</string>
+
+    <string name="direction_left">从左到右</string>
+    <string name="direction_right">从右到左</string>
+
+    <!-- 菜单选项 -->
+    <string name="menu_connect">连接</string>
+    <string name="menu_disconnect">断开</string>
+    <string name="menu_scan">扫描</string>
+    <string name="menu_stop">停止</string>
+    <string name="menu_start">开始</string>
+
+</resources>

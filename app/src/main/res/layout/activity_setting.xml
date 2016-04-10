@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+        <edu.buffalo.tablecloth.widget.LightsLayout
+                android:id="@+id/view_lights"
+                android:layout_marginBottom="1dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+        </edu.buffalo.tablecloth.widget.LightsLayout>
+
+        <Button
+                android:text="发送命令"
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        <Button
+                android:text="保存"
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <ScrollView
+            android:scrollbars="none"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+        <edu.buffalo.tablecloth.widget.OrderLayout
+                android:id="@+id/view_order"
+                android:columnCount="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+        </edu.buffalo.tablecloth.widget.OrderLayout>
+
+    </ScrollView>
+
+</LinearLayout>

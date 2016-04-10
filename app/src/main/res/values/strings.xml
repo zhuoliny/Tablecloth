@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Smart Tablecloth</string>
+    <string name="go">Go</string>
+    <string name="setting">Setting</string>
+    <string name="start">Start</string>
+    <string name="go_on">Continue</string>
+    <string name="stop">Stop</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="out">Exit</string>
+    <string name="save">Save</string>
+    <string name="preview">Preview</string>
+    <string name="record">More Info</string>
+    <string name="home">Home</string>
+
+    <string name="device_not_support">USB devices do not support</string>
+    <string name="device_attached">USB device connection is successful</string>
+    <string name="device_detached">Disconnect USB devices</string>
+    <string name="no_device_or_not_match">USB disconnected or device does not match</string>
+
+    <string name="mode_black_and_red">Black and Red Mode</string>
+    <string name="mode_colorful">Colorful Mode</string>
+    <string name="mode_rainbow">Rainbow Mode</string>
+    <string name="mode_preset">Preset Control Mode</string>
+    <string name="mode_customized">Customized Mode</string>
+    <string name="mode_work">Working Mode</string>
+    <string name="mode_group">Group Setting</string>
+    <string name="mode_area">Area Setting</string>
+    <string name="mode_hammer">Hammer Device</string>
+    <string name="mode_read_datas">Read Datas</string>
+    <string name="mode_main_UI">Main UI mode</string>
+
+    <string name="action_read_pressures">Read pressures datas</string>
+    <string name="action_read_orders">Read orders datas</string>
+    <string name="action_warning">Pressures datas miss，Please connect the usb</string>
+
+    <string name="lights_control"> Lights color control</string>
+    <string name="lights_counts">counts of lights on :</string>
+    <string name="lights_sure">OK</string>
+    <string name="lights_on">on</string>
+    <string name="lights_off">off</string>
+
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_yellow">Yellow</string>
+
+    <string name="show_lights">Show ligths</string>
+    <string name="set_lights">Set ligths</string>
+
+    <string name="data_date_new">new Date</string>
+    <string name="data_add_date">add new Date</string>
+    <string name="data_add_attempts">add new Attempts</string>
+    <string name="data_remove_attempts">remove last Attempts</string>
+    <string name="data_hello">hello I am the location of Attempts：</string>
+
+    <string name="pattern_mode_preset">Preset Patterns</string>
+    <string name="pattern_mode_customized">Customized Pattern</string>
+
+    <string name="light_mode_random">Random Mode</string>
+    <string name="light_mode_sequential">Sequential Mode</string>
+    <string name="light_mode_odd_numbers">Odd numbers Mode</string>
+    <string name="light_mode_even_numbers">Even numbers Mode</string>
+    <string name="light_mode_discontinuous">Discontinuous Mode</string>
+    <string name="light_mode_zigzag">Zigzag Mode</string>
+    <string name="light_mode_two_led">Two-Led Mode</string>
+    <string name="light_mode_two_alternating">Two alternating Mode</string>
+    <string name="light_mode_trajectory">Trajectory Mode</string>
+
+    <string name="light_guide_period">Please to choose the period</string>
+    <string name="light_guide_period_preset">Please to choose the period for Preset Mode</string>
+    <string name="light_guide_direction_sequential">Please to choose the direction for Sequential Mode</string>
+    <string name="light_guide_gap_discontinuous">Please to choose the gap counts for Discontinuous Mode</string>
+    <string name="light_guide_area">Please to choose the area of the lights</string>
+    <string name="light_guide_group">Please to choose the numbers of a group lights</string>
+    <string name="light_guide_mode">Please to choose the mode</string>
+
+    <string name="work_mode_triggle">Triggle Mode(turn off the green ligth,red light means wrong action)</string>
+    <string name="work_mode_preset">Preset Mode(please custom the period by yourself)</string>
+    <string name="work_mode_randomized">Randomized Mode(period random)</string>
+
+    <string name="direction_left">Left to Right</string>
+    <string name="direction_right">Right to Left</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="menu_start">Start</string>
+
+</resources>
