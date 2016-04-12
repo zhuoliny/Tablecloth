@@ -19,6 +19,15 @@ import org.androidannotations.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.UUID;
+
 import edu.buffalo.tablecloth.R;
 import edu.buffalo.tablecloth.service.TableclothService;
 import edu.buffalo.tablecloth.service.TableclothService_;
@@ -47,10 +56,12 @@ public class UsbActivity extends Activity {
 
     private TableclothService mTableclothService;
 
+    UUID uid;
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LOGGER.debug("connected service {}", name.getClassName());
+            uid = UUID.randomUUID();
             mTableclothService = ((TableclothService.LocalBinder) service).getService();
             mTableclothService.initUsb();
         }
@@ -132,9 +143,32 @@ public class UsbActivity extends Activity {
         showToast("connect success !");
     }
 
+
     @Receiver(actions = TableclothService.ACTION_TABLECLOTH_DATA)
     protected void onReceivedData(@Receiver.Extra(TableclothService.EXTRA_DATA) int[] pressures) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this.appendLog(timeStamp + " " + Arrays.toString(pressures));
         pseudoColorTablecloth.reFresh(pressures);
+    }
+
+    private void appendLog(String text) {
+        File logFile = new File("sdcard/tablecloth/" + this.uid + ".txt");
+        if(!logFile.exists()) {
+            try {
+                logFile.getParentFile().mkdirs();
+                logFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(logFile, true));
+            bufferedWriter.append(text);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean connected = false;
