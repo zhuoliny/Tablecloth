@@ -56,12 +56,12 @@ public class UsbActivity extends Activity {
 
     private TableclothService mTableclothService;
 
-    UUID uid;
+    String uid;
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             LOGGER.debug("connected service {}", name.getClassName());
-            uid = UUID.randomUUID();
+            uid = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             mTableclothService = ((TableclothService.LocalBinder) service).getService();
             mTableclothService.initUsb();
         }
