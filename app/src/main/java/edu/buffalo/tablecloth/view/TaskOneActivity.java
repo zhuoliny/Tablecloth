@@ -9,13 +9,17 @@ import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.androidannotations.annotations.*;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
+import org.androidannotations.annotations.Receiver;
+import org.androidannotations.annotations.ViewById;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,24 +30,22 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import edu.buffalo.tablecloth.R;
 import edu.buffalo.tablecloth.service.TableclothService;
 import edu.buffalo.tablecloth.service.TableclothService_;
 import edu.buffalo.tablecloth.widget.PseudoColorTablecloth;
 
-@EActivity(R.layout.activity_usb)
-@OptionsMenu(R.menu.main_usb)
-public class UsbActivity extends Activity {
+@EActivity(R.layout.activity_taskone)
+@OptionsMenu(R.menu.main_taskone)
+public class TaskOneActivity extends Activity {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UsbActivity.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneActivity.class);
 
-    @ViewById(R.id.tv_flag)
-    protected TextView tvFlag;
-    @ViewById(R.id.btn_add)
-    protected Button btnAdd;
-    @ViewById(R.id.btn_cut)
-    protected Button btnCut;
+    private final ExecutorService mExecutorService = Executors.newCachedThreadPool();
 
     @OptionsMenuItem(R.id.mniStart)
     protected MenuItem mniStart;
@@ -60,7 +62,7 @@ public class UsbActivity extends Activity {
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            LOGGER.debug("connected service {}", name.getClassName());
+            LOGGER.debug("connected service: {}", name.getClass());
             uid = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             mTableclothService = ((TableclothService.LocalBinder) service).getService();
             mTableclothService.initUsb();
@@ -68,12 +70,13 @@ public class UsbActivity extends Activity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            LOGGER.debug("disconnected service {}", this);
+            LOGGER.debug("disconnected service: {}", this);
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
@@ -90,9 +93,10 @@ public class UsbActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         unbindService(mTableclothServiceConnection);
     }
+
+    private boolean connected = false;
 
     @Receiver(actions = UsbManager.ACTION_USB_DEVICE_ATTACHED)
     protected void onDeviceAttached(@Receiver.Extra Intent intent) {
@@ -100,10 +104,9 @@ public class UsbActivity extends Activity {
         mTableclothService.connectUsbDevice(device);
     }
 
+
     @Receiver(actions = UsbManager.ACTION_USB_DEVICE_DETACHED)
     protected void onDeviceDetached() {
-        //TODO 关闭连接
-
         connected = false;
     }
 
@@ -116,7 +119,7 @@ public class UsbActivity extends Activity {
     @Receiver(actions = TableclothService.ACTION_USB_PERMISSION_FAILED)
     protected void onUsbPermissionFailed() {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                edu.buffalo.tablecloth.view.UsbActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
+                edu.buffalo.tablecloth.view.TaskOneActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
         mTableclothService.requestPermission(pendingIntent);
     }
 
@@ -132,8 +135,6 @@ public class UsbActivity extends Activity {
 
     @Receiver(actions = TableclothService.ACTION_CONNECTION_FAILED)
     protected void onConnectionFailed() {
-        //TODO 连接失败的操作
-
         showToast("connect fail ! please try again");
     }
 
@@ -143,11 +144,68 @@ public class UsbActivity extends Activity {
         showToast("connect success !");
     }
 
+    private int[] status;
+    static int switchpositionFlag = 0;
+    static int lightgridLatch = 0;
 
     @Receiver(actions = TableclothService.ACTION_TABLECLOTH_DATA)
     protected void onReceivedData(@Receiver.Extra(TableclothService.EXTRA_DATA) int[] pressures) {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         this.appendLog(timeStamp + " " + Arrays.toString(pressures));
+
+        boolean pressureSensed = false;
+
+        for (int i=0;i<384;i++) {
+            if (pressures[i] > 1) {
+                lightgridLatch = 1;
+                pressureSensed = true;
+                break;
+            }
+        }
+
+        if (pressureSensed) {
+            if(lightgridLatch == 1) {
+                if (switchpositionFlag == 0) switchpositionFlag = 1;
+                else {
+                    switchpositionFlag = 0;
+                }
+            }
+        }
+
+        if (switchpositionFlag == 0) {
+            status = new int[]{
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+                    0, 0, 0, 0, 0, 0, 0, 2,
+            };
+            mExecutorService.submit(new SendOrderRunnerable(status));
+        } else {
+            status = new int[]{
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+                    2, 0, 0, 0, 0, 0, 0, 0,
+            };
+            mExecutorService.submit(new SendOrderRunnerable(status));
+        }
+
         pseudoColorTablecloth.reFresh(pressures);
     }
 
@@ -171,8 +229,6 @@ public class UsbActivity extends Activity {
         }
     }
 
-    private boolean connected = false;
-
     @OptionsItem(R.id.mniStart)
     protected void startToRead() {
         if (!connected) {
@@ -195,39 +251,67 @@ public class UsbActivity extends Activity {
         }
     }
 
-    @Click(R.id.btn_add)
-    protected void addFlag() {
-        if (mTableclothService != null) {
-            mTableclothService.add();
-            tvFlag.setText(mTableclothService.getFlag() + "");
+    private class SendOrderRunnerable implements Runnable {
+
+        private final int[] status;
+        private final int LIGHTS_COUNT = 8;
+        private final int ORDERS_LENGTH = 25;
+
+        public SendOrderRunnerable(int[] status) {
+            this.status = status;
+        }
+
+        @Override
+        public void run() {
+            byte[] command = convertStatusToOrders(status);
+            mTableclothService.startWriteUsbDeviceCommand(command);
+        }
+
+        private byte[] convertStatusToOrders(int[] status) {
+            byte[] command = new byte[ORDERS_LENGTH];
+            int[] greenLightStatus = new int[LIGHTS_COUNT];
+            int[] redLightStatus = new int[LIGHTS_COUNT];
+            int lightLocation = 0, commandLocation = 0;
+
+            for (int i = 0; i < status.length; i++) {
+                if (status[i] == 0) {
+                    greenLightStatus[lightLocation] = 0;
+                    redLightStatus[lightLocation] = 0;
+                } else if (status[i] == 1) {
+                    greenLightStatus[lightLocation] = 1;
+                    redLightStatus[lightLocation] = 0;
+                } else if (status[i] == 2) {
+                    greenLightStatus[lightLocation] = 0;
+                    redLightStatus[lightLocation] = 1;
+                } else {
+                    LOGGER.debug("get the wrong status {}", status[i]);
+                }
+
+                if (lightLocation == 7) {
+                    lightLocation = 0;
+                    command[commandLocation] = convertIntArrayToByte(redLightStatus);
+                    commandLocation++;
+                    command[commandLocation] = convertIntArrayToByte(greenLightStatus);
+                    commandLocation++;
+                } else {
+                    lightLocation++;
+                }
+            }
+            Log.d("orders: ", Arrays.toString(command));
+            return command;
+        }
+
+        private byte convertIntArrayToByte(int[] lightStatus) {
+            byte order = 0x00;
+            for (int i = 0; i < lightStatus.length; i++) {
+                order += (byte) (lightStatus[i] << i);
+            }
+            return order;
         }
     }
 
-    @Click(R.id.btn_cut)
-    protected void cutFlag() {
-        if (mTableclothService != null) {
-            mTableclothService.cut();
-            tvFlag.setText(mTableclothService.getFlag() + "");
-        }
-    }
-
-//    private class WriteDataRunnable implements Runnable {
-//
-//        @Override
-//        public void run() {
-//            int transfer = connection.bulkTransfer(endpointWrite, buffer, buffer.length,
-//                    TIME_OUT);
-//            if (transfer < 0) {
-//                Log.d(TAG, "transfer is less than zore,is :" + transfer);
-//            } else {
-//                Log.d(TAG, "transfer is more than zore,is :" + transfer);
-////                        sendMessageRefreshUI();
-//            }
-//        }
-//    }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
-
 }

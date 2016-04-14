@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.UsbActivity_"/>
+        <activity android:name=".view.TaskOneActivity_"/>
         <activity android:name=".view.SettingActivity_"
             android:screenOrientation="sensorPortrait"/>
         <service android:name=".service.TableclothService_"

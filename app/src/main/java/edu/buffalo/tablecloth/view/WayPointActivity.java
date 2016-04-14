@@ -17,8 +17,9 @@ import edu.buffalo.tablecloth.service.TableclothService_;
 
 public class WayPointActivity extends ListActivity {
     private static final Item[] samplesConfig = new Item[]{
-            new Item("命令设置", SettingActivity_.class),
-            new Item("桌布彩虹图", UsbActivity_.class),
+            new Item("SettingActivity", SettingActivity_.class),
+            new Item("UsbActivity", UsbActivity_.class),
+            new Item("TaskOne", TaskOneActivity_.class),
     };
 
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
