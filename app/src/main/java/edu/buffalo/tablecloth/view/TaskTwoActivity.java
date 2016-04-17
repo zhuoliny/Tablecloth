@@ -41,7 +41,7 @@ import edu.buffalo.tablecloth.widget.PseudoColorTablecloth;
 
 @EActivity(R.layout.activity_taskone)
 @OptionsMenu(R.menu.main_taskone)
-public class TaskOneActivity extends Activity {
+public class TaskTwoActivity extends Activity {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneActivity.class);
 
@@ -119,7 +119,7 @@ public class TaskOneActivity extends Activity {
     @Receiver(actions = TableclothService.ACTION_USB_PERMISSION_FAILED)
     protected void onUsbPermissionFailed() {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                edu.buffalo.tablecloth.view.TaskOneActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
+                edu.buffalo.tablecloth.view.TaskTwoActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
         mTableclothService.requestPermission(pendingIntent);
     }
 
@@ -158,9 +158,9 @@ public class TaskOneActivity extends Activity {
         for (int i=0;i<384;i++) {
             if (pressures[i] > 1) {
                 pressureSensed = true;
-                if (i==174 || i==175 || i==190 || i==191)    //Lower Right
+                if (i==6 || i==7 || i==22 || i==23)    //Top
                     lightgridLatch = 1;
-                else if (i==160 || i==161 || i==176 || i==177)   //Upper Left
+                else if (i==358 || i==359 || i==374 || i==375)   //Bottom
                     lightgridLatch = 0;
                 break;
             }
@@ -177,12 +177,12 @@ public class TaskOneActivity extends Activity {
 
         if (switchpositionFlag == 0) {
             status = new int[]{
+                    0, 0, 0, 1, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 2,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
@@ -199,13 +199,13 @@ public class TaskOneActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    2, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 1, 0, 0, 0, 0,
             };
             this.appendLog(timeStamp + " " + Arrays.toString(status));
             mExecutorService.submit(new SendOrderRunnerable(status));

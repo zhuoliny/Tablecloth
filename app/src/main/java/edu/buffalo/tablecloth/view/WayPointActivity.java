@@ -20,6 +20,8 @@ public class WayPointActivity extends ListActivity {
             new Item("SettingActivity", SettingActivity_.class),
             new Item("UsbActivity", UsbActivity_.class),
             new Item("TaskOne", TaskOneActivity_.class),
+            new Item("TaskTwo", TaskTwoActivity_.class),
+            new Item("TaskThree", TaskThreeActivity_.class),
     };
 
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {

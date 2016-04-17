@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -41,7 +40,7 @@ import edu.buffalo.tablecloth.widget.PseudoColorTablecloth;
 
 @EActivity(R.layout.activity_taskone)
 @OptionsMenu(R.menu.main_taskone)
-public class TaskOneActivity extends Activity {
+public class TaskThreeActivity extends Activity {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneActivity.class);
 
@@ -119,7 +118,7 @@ public class TaskOneActivity extends Activity {
     @Receiver(actions = TableclothService.ACTION_USB_PERMISSION_FAILED)
     protected void onUsbPermissionFailed() {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                edu.buffalo.tablecloth.view.TaskOneActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
+                edu.buffalo.tablecloth.view.TaskThreeActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
         mTableclothService.requestPermission(pendingIntent);
     }
 
@@ -145,8 +144,6 @@ public class TaskOneActivity extends Activity {
     }
 
     private int[] status;
-    static int switchpositionFlag = 0;
-    static int lightgridLatch = 0;
 
     @Receiver(actions = TableclothService.ACTION_TABLECLOTH_DATA)
     protected void onReceivedData(@Receiver.Extra(TableclothService.EXTRA_DATA) int[] pressures) {
@@ -157,33 +154,21 @@ public class TaskOneActivity extends Activity {
 
         for (int i=0;i<384;i++) {
             if (pressures[i] > 1) {
-                pressureSensed = true;
-                if (i==174 || i==175 || i==190 || i==191)    //Lower Right
-                    lightgridLatch = 1;
-                else if (i==160 || i==161 || i==176 || i==177)   //Upper Left
-                    lightgridLatch = 0;
+                if (i==198 || i==199 || i==214 || i==215)    //At point
+                    pressureSensed = true;
                 break;
             }
         }
 
-        if (pressureSensed) {
-            if(lightgridLatch == 1) {
-                switchpositionFlag = 1;
-            }
-            else {
-                switchpositionFlag = 0;
-            }
-        }
-
-        if (switchpositionFlag == 0) {
+        if (pressureSensed == false) {
             status = new int[]{
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 2,
                     0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 2, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
@@ -199,7 +184,7 @@ public class TaskOneActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    2, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
