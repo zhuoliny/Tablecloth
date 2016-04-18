@@ -19,6 +19,7 @@ public class WayPointActivity extends ListActivity {
     private static final Item[] samplesConfig = new Item[]{
             new Item("命令设置", SettingActivity_.class),
             new Item("桌布彩虹图", UsbActivity_.class),
+            new Item("Bluetooth Can", BluetoothCanActivity.class)
     };
 
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {

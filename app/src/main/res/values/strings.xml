@@ -91,4 +91,12 @@
     <string name="menu_stop">Stop</string>
     <string name="menu_start">Start</string>
 
+
+    <!-- BluetoothCanActivity-->
+    <string name="bluetooth_not_avail">Your device does not have bluetooth capabilities</string>
+
+    <string name="bluetooth_disabled"> Bluetooth is not enabled </string>
+
+    <string name="connecting">Connecting...</string>
+
 </resources>
