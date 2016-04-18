@@ -1,10 +1,12 @@
 package edu.buffalo.tablecloth;
 
 import android.content.Context;
+import android.os.Environment;
 import android.view.Display;
 import android.view.WindowManager;
 
 import org.androidannotations.annotations.EApplication;
+
 
 @EApplication
 public class Application extends android.app.Application {
@@ -13,6 +15,7 @@ public class Application extends android.app.Application {
 
     public static int width;
     public static int height;
+
 
     @Override
     public void onCreate() {

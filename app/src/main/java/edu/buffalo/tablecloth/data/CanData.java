@@ -15,7 +15,9 @@ public class CanData {
                    float magZ,
                    float gyrX,
                    float gyrY,
-                   float gyrZ
+                   float gyrZ,
+                   String yymmdd, //year month day
+                   String hhssmm // hour, second, microsecond
     ) {
         this.accX = accX;
         this.accY = accY;

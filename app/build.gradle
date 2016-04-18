@@ -40,5 +40,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile "org.androidannotations:androidannotations:$AAVersion"
     apt "org.androidannotations:androidannotations-api:$AAVersion"
-    compile 'org.slf4j:slf4j-simple:1.6.1'
+    compile 'org.slf4j:slf4j-api:1.7.21'
+    compile 'org.slf4j:slf4j-simple:1.7.21'
 }

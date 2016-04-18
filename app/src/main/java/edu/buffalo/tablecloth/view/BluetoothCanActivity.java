@@ -179,7 +179,9 @@ public class BluetoothCanActivity extends Activity {
                         @Override
                         public void onSensorsUpdate(float accX, float accY, float accZ, float magX, float magY, float magZ, float gyrX, float gyrY, float gyrZ) {
                             yawTextView.setText("ACCX: " + accX);
-                            CanData c = new CanData(accX, accY, accZ, magX, magY, magZ, gyrX, gyrY, gyrZ);
+                            String yearMonthDay = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                            String hourMinuteSecondMilli = new SimpleDateFormat("HHmmssSSS").format(new Date());
+                            CanData c = new CanData(accX, accY, accZ, magX, magY, magZ, gyrX, gyrY, gyrZ, yearMonthDay, hourMinuteSecondMilli);
                             _logList.add(c);
 
                         }
@@ -216,8 +218,7 @@ public class BluetoothCanActivity extends Activity {
                                                     try {
                                                         _fwriter = new FileWriter(_logFile.getAbsolutePath(),true);
                                                         for (CanData c : _logList) {
-                                                            long millis = System.currentTimeMillis();
-                                                            String write = c.toString() + "," + millis + "\n";
+                                                            String write = c.toString() + "\n";
                                                             writeToFile(_fwriter,write);
                                                         }
                                                         _fwriter.close();

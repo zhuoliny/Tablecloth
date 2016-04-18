@@ -19,14 +19,14 @@
         </edu.buffalo.tablecloth.widget.LightsLayout>
 
         <Button
-                android:text="发送命令"
+                android:text="Send"
                 android:id="@+id/btn_send"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
 
         <Button
-                android:text="保存"
+                android:text="Save"
                 android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

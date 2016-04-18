@@ -13,7 +13,6 @@ import android.hardware.usb.UsbManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.androidannotations.annotations.EService;
 import org.slf4j.Logger;
@@ -273,10 +272,11 @@ public class TableclothService extends Service {
             }
             LOGGER.debug("native 768 data : {}", Arrays.toString(data));
             int[] pressures = convertData(data);
-            //Toast.makeText(getApplicationContext(), Arrays.toString(data), Toast.LENGTH_SHORT).show();
-            Log.i("Pressure", Arrays.toString(pressures));
+
             sendBroadcast(new Intent(ACTION_TABLECLOTH_DATA).putExtra(EXTRA_DATA, pressures));
         }
+
+
     }
 
     int flag = 1024;

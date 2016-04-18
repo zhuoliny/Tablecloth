@@ -31,16 +31,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.UsbActivity_" />
-        <activity
-            android:name=".view.SettingActivity_"
-            android:screenOrientation="sensorPortrait" />
 
-        <service
-            android:name=".service.TableclothService_"
-            android:enabled="true" />
-
-        <activity android:name=".view.BluetoothCanActivity"></activity>
+        <activity android:name=".view.UsbActivity_"/>
+        <activity android:name=".view.TaskOneActivity_"/>
+        <activity android:name=".view.TaskTwoActivity_"/>
+        <activity android:name=".view.TaskThreeActivity_"/>
+        <activity android:name=".view.SettingActivity_"
+            android:screenOrientation="sensorPortrait"/>
+        <service android:name=".service.TableclothService_"
+            android:enabled="true"/>
     </application>
 
 </manifest>
