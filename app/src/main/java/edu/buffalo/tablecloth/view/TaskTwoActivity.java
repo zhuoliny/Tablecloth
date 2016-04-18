@@ -150,8 +150,8 @@ public class TaskTwoActivity extends Activity {
 
     @Receiver(actions = TableclothService.ACTION_TABLECLOTH_DATA)
     protected void onReceivedData(@Receiver.Extra(TableclothService.EXTRA_DATA) int[] pressures) {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        this.appendLog(timeStamp + " " + Arrays.toString(pressures));
+        String timeStamp = new SimpleDateFormat("yyyyMMdd,HHmmss.SSS").format(Calendar.getInstance().getTimeInMillis());
+        this.appendLog(timeStamp + " " + Arrays.toString(pressures).replace("[","").replace("]","").trim());
 
         boolean pressureSensed = false;
 
@@ -190,7 +190,7 @@ public class TaskTwoActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
             };
-            this.appendLog(timeStamp + " " + Arrays.toString(status));
+            this.appendLog(timeStamp + " " + Arrays.toString(status).replace("[",",").replace("]","").trim());
             mExecutorService.submit(new SendOrderRunnerable(status));
         } else {
             status = new int[]{
@@ -207,7 +207,7 @@ public class TaskTwoActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 1, 0, 0, 0, 0,
             };
-            this.appendLog(timeStamp + " " + Arrays.toString(status));
+            this.appendLog(timeStamp + " " + Arrays.toString(status).replace("[","").replace("]","").trim());
             mExecutorService.submit(new SendOrderRunnerable(status));
         }
 
@@ -215,7 +215,7 @@ public class TaskTwoActivity extends Activity {
     }
 
     private void appendLog(String text) {
-        File logFile = new File("sdcard/tablecloth/" + this.uid + ".txt");
+        File logFile = new File("sdcard/tablecloth/" + this.uid + ".csv");
         if(!logFile.exists()) {
             try {
                 logFile.getParentFile().mkdirs();
