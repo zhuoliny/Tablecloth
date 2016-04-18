@@ -23,6 +23,7 @@ public class WayPointActivity extends ListActivity {
             new Item("TaskOne", TaskOneActivity_.class),
             new Item("TaskTwo", TaskTwoActivity_.class),
             new Item("TaskThree", TaskThreeActivity_.class),
+            new Item("IMU",BluetoothCanActivity.class)
     };
 
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
