@@ -148,7 +148,7 @@ public class TaskThreeActivity extends Activity {
     @Receiver(actions = TableclothService.ACTION_TABLECLOTH_DATA)
     protected void onReceivedData(@Receiver.Extra(TableclothService.EXTRA_DATA) int[] pressures) {
         String timeStamp = new SimpleDateFormat("yyyyMMdd,HHmmss.SSS").format(Calendar.getInstance().getTimeInMillis());
-        this.appendLog(timeStamp + " " + Arrays.toString(pressures).replace("[","").replace("]","").trim());
+        this.appendLog(timeStamp + " " + Arrays.toString(pressures).replace("[",",").replace("]","").trim());
 
         boolean pressureSensed = false;
 
@@ -175,7 +175,7 @@ public class TaskThreeActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
             };
-            this.appendLog(timeStamp + " " + Arrays.toString(status).replace("[","").replace("]","").trim());
+            this.appendLog(timeStamp + " " + Arrays.toString(status).replace("[",",").replace("]","").trim());
             mExecutorService.submit(new SendOrderRunnerable(status));
         } else {
             status = new int[]{
