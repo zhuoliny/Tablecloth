@@ -5,6 +5,7 @@ package edu.buffalo.tablecloth.data;
  */
 public class CanData {
     private float accX,accY,accZ, magX,magY, magZ, gyrX, gyrY,gyrZ;
+    private String yymmdd, hhssmm;
     private long id;
 
     public CanData(float accX,
@@ -28,6 +29,8 @@ public class CanData {
         this.gyrX = gyrX;
         this.gyrY = gyrY;
         this.gyrZ = gyrZ;
+        this.yymmdd = yymmdd;
+        this.hhssmm = hhssmm;
     }
 
 
@@ -36,6 +39,6 @@ public class CanData {
     public String toString() {
         return accX + "," + accY+","+accZ
                 +","+magX+","+magY+","+magZ
-                +","+gyrX+","+gyrY+","+gyrZ;
+                +","+gyrX+","+gyrY+","+gyrZ+","+yymmdd+","+hhssmm;
     }
 }

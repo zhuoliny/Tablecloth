@@ -26,9 +26,6 @@ import java.util.Set;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Environment;
@@ -135,9 +132,8 @@ public class BluetoothCanActivity extends Activity {
 
             connectButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    SimpleDateFormat s = new SimpleDateFormat("yyyyMMddHHmmss");
-                    FILENAME = s.format(new Date()) + ".csv";
-                    _logFile = new File(Environment.getExternalStorageDirectory(),FILENAME);
+                    SimpleDateFormat s = new SimpleDateFormat("yyyyMMdd_HHmmss");
+                    _logFile = new File("sdcard/tablecloth/" + s.format(new Date()) + ".csv");
 
 
                     setButtonStateConnecting();
@@ -180,7 +176,7 @@ public class BluetoothCanActivity extends Activity {
                         public void onSensorsUpdate(float accX, float accY, float accZ, float magX, float magY, float magZ, float gyrX, float gyrY, float gyrZ) {
                             yawTextView.setText("ACCX: " + accX);
                             String yearMonthDay = new SimpleDateFormat("yyyyMMdd").format(new Date());
-                            String hourMinuteSecondMilli = new SimpleDateFormat("HHmmssSSS").format(new Date());
+                            String hourMinuteSecondMilli = new SimpleDateFormat("HHmmss.SSS").format(new Date());
                             CanData c = new CanData(accX, accY, accZ, magX, magY, magZ, gyrX, gyrY, gyrZ, yearMonthDay, hourMinuteSecondMilli);
                             _logList.add(c);
 
