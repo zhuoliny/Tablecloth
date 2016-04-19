@@ -1,35 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.buffalo.tablecloth">
 
     <uses-sdk
         android:minSdkVersion="19"
-        android:targetSdkVersion="22"/>
+        android:targetSdkVersion="22" />
 
-    <uses-feature android:name="android.hardware.usb.host"/>
+    <uses-feature android:name="android.hardware.usb.host" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Application_"
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".view.WayPointActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.UsbActivity_"/>
         <activity android:name=".view.TaskOneActivity_"/>
         <activity android:name=".view.TaskTwoActivity_"/>
         <activity android:name=".view.TaskThreeActivity_"/>
+        <activity android:name=".view.BluetoothCanActivity"/>
         <activity android:name=".view.SettingActivity_"
             android:screenOrientation="sensorPortrait"/>
         <service android:name=".service.TableclothService_"

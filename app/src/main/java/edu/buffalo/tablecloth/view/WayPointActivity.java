@@ -17,11 +17,13 @@ import edu.buffalo.tablecloth.service.TableclothService_;
 
 public class WayPointActivity extends ListActivity {
     private static final Item[] samplesConfig = new Item[]{
+
             new Item("SettingActivity", SettingActivity_.class),
             new Item("UsbActivity", UsbActivity_.class),
             new Item("TaskOne", TaskOneActivity_.class),
             new Item("TaskTwo", TaskTwoActivity_.class),
             new Item("TaskThree", TaskThreeActivity_.class),
+            new Item("IMU",BluetoothCanActivity.class)
     };
 
     private ServiceConnection mTableclothServiceConnection = new ServiceConnection() {
