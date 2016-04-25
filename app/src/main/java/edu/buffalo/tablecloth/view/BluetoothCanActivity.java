@@ -132,6 +132,7 @@ public class BluetoothCanActivity extends Activity {
 
             connectButton.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
+                    _logList.clear();
                     SimpleDateFormat s = new SimpleDateFormat("yyyyMMdd_HHmmss");
                     _logFile = new File("sdcard/tablecloth/" + s.format(new Date()) + ".csv");
 
@@ -217,6 +218,7 @@ public class BluetoothCanActivity extends Activity {
                                                             String write = c.toString() + "\n";
                                                             writeToFile(_fwriter,write);
                                                         }
+                                                        _logList.clear();
                                                         _fwriter.close();
 
                                                     } catch (Exception i) {

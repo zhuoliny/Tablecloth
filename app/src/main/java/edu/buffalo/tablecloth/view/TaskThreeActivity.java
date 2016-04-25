@@ -42,7 +42,7 @@ import edu.buffalo.tablecloth.widget.PseudoColorTablecloth;
 @OptionsMenu(R.menu.main_taskone)
 public class TaskThreeActivity extends Activity {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneActivity.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskThreeActivity.class);
 
     private final ExecutorService mExecutorService = Executors.newCachedThreadPool();
 

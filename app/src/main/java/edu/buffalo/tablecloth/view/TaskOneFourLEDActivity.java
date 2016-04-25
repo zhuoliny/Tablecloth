@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -41,9 +40,8 @@ import edu.buffalo.tablecloth.widget.PseudoColorTablecloth;
 
 @EActivity(R.layout.activity_taskone)
 @OptionsMenu(R.menu.main_taskone)
-public class TaskOneActivity extends Activity {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneActivity.class);
+public class TaskOneFourLEDActivity extends Activity {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TaskOneFourLEDActivity.class);
 
     private final ExecutorService mExecutorService = Executors.newCachedThreadPool();
 
@@ -119,7 +117,7 @@ public class TaskOneActivity extends Activity {
     @Receiver(actions = TableclothService.ACTION_USB_PERMISSION_FAILED)
     protected void onUsbPermissionFailed() {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                edu.buffalo.tablecloth.view.TaskOneActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
+                edu.buffalo.tablecloth.view.TaskOneFourLEDActivity.this, 0, new Intent(TableclothService.ACTION_USB_PERMISSION_REQUEST), 0);
         mTableclothService.requestPermission(pendingIntent);
     }
 
@@ -158,9 +156,17 @@ public class TaskOneActivity extends Activity {
         for (int i=0;i<384;i++) {
             if (pressures[i] > 1) {
                 pressureSensed = true;
-                if (i==174 || i==175 || i==190 || i==191)    //Lower
+                if (i==174 || i==175 || i==190 || i==191 ||         //LOWER Lower Left
+                      i==172 || i==173 || i==188 || i==189 ||       //LOWER Upper Left
+                       i==204 || i==205 || i==220 || i==221 ||      //LOWER Upper Right
+                        i==206 || i==207 || i==222 || i==223        //LOWER Lower Right
+                        )
                     lightgridLatch = 1;
-                else if (i==160 || i==161 || i==176 || i==177)   //Upper
+                else if (i==160 || i==161 || i==176 || i==177 ||    //UPPER Upper Left
+                        i==162 || i==163 || i==178 || i==179 ||     //UPPER Lower Left
+                        i==192 || i==193 || i==208 || i==209 ||     //UPPER Upper Right
+                        i==194 || i==195 || i==210 || i==211        //UPPER Lower Right
+                        )
                     lightgridLatch = 0;
                 break;
             }
@@ -182,8 +188,8 @@ public class TaskOneActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 2,
-                    0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 2, 2,
+                    0, 0, 0, 0, 0, 0, 2, 2,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
@@ -199,8 +205,8 @@ public class TaskOneActivity extends Activity {
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
-                    2, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0,
+                    2, 2, 0, 0, 0, 0, 0, 0,
+                    2, 2, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0,
