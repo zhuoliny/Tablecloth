@@ -26,6 +26,8 @@ public class WayPointActivity extends ListActivity {
             new Item("TaskTwoFourLED", TaskTwoFourLEDActivity_.class),
             new Item("TaskThree", TaskThreeActivity_.class),
             new Item("TaskThreeFourLED", TaskThreeFourLEDActivity_.class),
+            new Item("TaskFourInOrder", TaskFourStaticActivty_.class),
+            new Item("TaskFourInOrderFourLED", TaskFourStaticFourLEDActivity_.class),
             new Item("IMU",BluetoothCanActivity.class)
     };
 

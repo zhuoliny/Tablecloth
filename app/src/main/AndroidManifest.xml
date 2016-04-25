@@ -39,6 +39,8 @@
         <activity android:name=".view.TaskTwoFourLEDActivity_"/>
         <activity android:name=".view.TaskThreeActivity_"/>
         <activity android:name=".view.TaskThreeFourLEDActivity_"/>
+        <activity android:name=".view.TaskFourStaticActivty_"/>
+        <activity android:name=".view.TaskFourStaticFourLEDActivity_"/>
         <activity android:name=".view.BluetoothCanActivity"/>
         <activity android:name=".view.SettingActivity_"
             android:screenOrientation="sensorPortrait"/>
